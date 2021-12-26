@@ -1,0 +1,12 @@
+--- ../src-base/minecraft/net/minecraft/nbt/NBTTagCompound.java
++++ ../src-work/minecraft/net/minecraft/nbt/NBTTagCompound.java
+@@ -374,7 +374,9 @@
+         }
+         catch (ClassCastException classcastexception)
+         {
++
+             throw new ReportedException(this.func_82581_a(p_150295_1_, 9, classcastexception));
++
+         }
+ 
+         return new NBTTagList();
