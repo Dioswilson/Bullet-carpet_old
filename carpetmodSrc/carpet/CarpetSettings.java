@@ -43,7 +43,7 @@ import static carpet.CarpetSettings.RuleCategory.*;
 public class CarpetSettings {
     public static boolean locked = false;
 
-    public static final String carpetVersion = "v21_12_25";
+    public static final String carpetVersion = "v21_12_30";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
