@@ -1093,10 +1093,10 @@ public class CarpetSettings {
     @Rule(desc = "Disables random entity AI wandering", category = CREATIVE)
     public static boolean disableWandering;
     // ====== Bullet ===== //
-    @Rule(desc = "Tab info updates every gametick", category = {EXPERIMENTAL,BULLET})
+    @Rule(desc = "Tab info updates every gametick", category = {EXPERIMENTAL, BULLET})
     public static boolean updateTabEveryGametick;
 
-    @Rule(desc = "Always sets player gamemode into survival when using /s command", category ={EXPERIMENTAL,BULLET})
+    @Rule(desc = "Always sets player gamemode into survival when using /s command", category = {EXPERIMENTAL, BULLET})
     public static boolean alwaysSetPlayerIntoSurvival;
 
     @Rule(desc = "enables /enderchest <Player> to replace objective enderchest with your own one(Only for OPs)", category = {EXPERIMENTAL, COMMANDS, BULLET})
@@ -1107,6 +1107,9 @@ public class CarpetSettings {
 
     @Rule(desc = "enables /sb to display player's stats as scoreboard with a total entry", category = {EXPERIMENTAL, SURVIVAL, BULLET})
     public static boolean scoreboardStats;
+
+    @Rule(desc = "Fixes block states in F3 debug mode not updating for hoppers, droppers and dispensers", category = {FIX, EXPERIMENTAL, BULLET})
+    public static boolean blockStateSyncing;
 
     // ===== API ===== //
 

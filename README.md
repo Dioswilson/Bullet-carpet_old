@@ -67,5 +67,6 @@ Here i will list we did:
 /carpet commandEnderchest
 /carpet commandInventory(coded by slowik)
 /carpet scoreboardStats
+/carpet blockStateSyncing
 ```
 
