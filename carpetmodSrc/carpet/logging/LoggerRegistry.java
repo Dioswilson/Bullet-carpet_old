@@ -47,6 +47,7 @@ public class LoggerRegistry
     public static boolean __instantComparators;
     public static boolean __items;
     public static boolean __rng;
+    public static boolean __explosions;
     public static boolean __recipes;
     public static boolean __damageDebug;
     public static boolean __invisDebug;

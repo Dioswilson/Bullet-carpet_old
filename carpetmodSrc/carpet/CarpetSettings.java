@@ -43,7 +43,7 @@ import static carpet.CarpetSettings.RuleCategory.*;
 public class CarpetSettings {
     public static boolean locked = false;
 
-    public static final String carpetVersion = "v21_12_30";
+    public static final String carpetVersion = "v21_12_26";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
@@ -86,10 +86,15 @@ public class CarpetSettings {
     })
     public static boolean commandBlockInfo = true;
 
-    @Rule(desc = "Enables /loadchunk command", category = COMMANDS, extra = {
-            "Loads a chunk remotely"
+    @Rule(desc = "Enables /chunk command", category = COMMANDS, extra = {
+            "chunk info command"
     })
-    public static boolean commandLoadChunk = true;
+    public static boolean commandChunk = true;
+
+    @Rule(desc = "Enables /loadedChunks command", category = COMMANDS, extra = {
+            "Get information of the loaded chunks hashmap"
+    })
+    public static boolean commandLoadedChunks = true;
 
     @Rule(desc = "Enables /entityinfo command", category = COMMANDS, extra = {
             "Also enables yellow carpet placement action if 'carpets' rule is turned on as well"
@@ -504,6 +509,12 @@ public class CarpetSettings {
     /**
      * Rules in this category should end with the "Fix" suffix
      */
+
+    @Rule(desc = "A limiter for updates happening on the main thread to prevent crashes on instant tile tick.", category = FIX, options = {"0", "1000000", "10000000"})
+    public static int limitITTupdates = 0;
+
+    @Rule(desc = "Fixes the async packet bugs related to asynch observer updates.", category = FIX)
+    public static boolean asyncPacketUpdatesFix;
 
     @Rule(desc = "Fixes the pearl bugs removing them when players relog, similar fix to mc1.15.", category = FIX)
     public static boolean fixedPearlBugs;
@@ -1108,7 +1119,7 @@ public class CarpetSettings {
     @Rule(desc = "enables /sb to display player's stats as scoreboard with a total entry", category = {EXPERIMENTAL, SURVIVAL, BULLET})
     public static boolean scoreboardStats;
 
-    @Rule(desc = "Fixes block states in F3 debug mode not updating for hoppers, droppers and dispensers", category = {FIX, EXPERIMENTAL, BULLET})
+    @Rule(desc = "Fixes block states in F3 debug mode not updating for hoppers, droppers and dispensers.", category = {FIX, EXPERIMENTAL, BULLET})
     public static boolean blockStateSyncing;
 
     // ===== API ===== //

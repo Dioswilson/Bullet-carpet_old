@@ -10,6 +10,7 @@ public class CarpetCommands {
         handler.registerCommand(new CommandAutosave());
         handler.registerCommand(new CommandBlockInfo());
         handler.registerCommand(new CommandCarpet());
+        handler.registerCommand(new CommandChunk());
         handler.registerCommand(new CommandCounter());
         handler.registerCommand(new CommandDebugCarpet());
         handler.registerCommand(new CommandDebuglogger());
@@ -25,7 +26,7 @@ public class CarpetCommands {
         handler.registerCommand(new CommandLagSpike());
         handler.registerCommand(new CommandLazyChunkBehavior());
         handler.registerCommand(new CommandLight());
-        handler.registerCommand(new CommandLoadChunk());
+        handler.registerCommand(new CommandLoadedChunks());
         handler.registerCommand(new CommandLog());
         handler.registerCommand(new CommandPerimeter());
         handler.registerCommand(new CommandPing());
@@ -47,9 +48,12 @@ public class CarpetCommands {
         handler.registerCommand(new CommandTNT());
         handler.registerCommand(new CommandUnload());
         handler.registerCommand(new CommandUnload13());
-        //handler.registerCommand(new CommandUpdateCarpet());
+        handler.registerCommand(new CommandUpdateCarpet());
         handler.registerCommand(new CommandVillage());
         handler.registerCommand(new CommandWaypoint());
+        handler.registerCommand(new CommandChunk());
+        handler.registerCommand(new CommandLoadedChunks());
+        handler.registerCommand(new CommandZetBlock());
 
         // ----- RSMM Start ----- //
         handler.registerCommand(new MeterCommand(CarpetServer.rsmmServer));

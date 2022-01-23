@@ -36,6 +36,7 @@ public class CarpetServer // static for now - easier to handle all around the co
     public static ToggleableChannelHandler rsmmChannel;
     public static ToggleableChannelHandler wecuiChannel;
     public static boolean playerInventoryStacking = false;
+    public static int limitITTCounter;
 
     private static CarpetClientServer CCServer;
 
@@ -129,7 +130,7 @@ public class CarpetServer // static for now - easier to handle all around the co
         pluginChannels.onPlayerDisconnected(player);
         LoggerRegistry.playerDisconnected(player);
     }
-    
+
     public static Random setRandomSeed(int p_72843_1_, int p_72843_2_, int p_72843_3_)
     {
         long i = (long)p_72843_1_ * 341873128712L + (long)p_72843_2_ * 132897987541L + CCServer.getMinecraftServer().worlds[0].getWorldInfo().getSeed() + (long)p_72843_3_;
