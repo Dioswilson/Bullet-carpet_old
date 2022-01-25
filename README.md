@@ -68,5 +68,6 @@ Here i will list we did:
 /carpet commandInventory(coded by slowik)
 /carpet scoreboardStats
 /carpet blockStateSyncing
+/carpet extremeBehaviours
 ```
 
