@@ -36,7 +36,7 @@
          {
              PlayerProfileCache.ProfileEntry playerprofilecache$profileentry1 = this.field_152662_d.get(uuid);
 -            this.field_152661_c.remove(playerprofilecache$profileentry1.func_152668_a().getName().toLowerCase(Locale.ROOT));
-+            this.field_152661_c.remove(playerprofilecache$profileentry1.func_152668_a().getName()/*.toLowerCase(Locale.ROOT)*/);//Bullet TODO:Testear esto, ver si falta en algun lugar
++            this.field_152661_c.remove(playerprofilecache$profileentry1.func_152668_a().getName()/*.toLowerCase(Locale.ROOT)*/);//Bullet
              this.field_152663_e.remove(p_152651_1_);
          }
  
