@@ -125,7 +125,7 @@
                          return BlockRedstoneWire.EnumAttachPosition.UP;
                      }
  
-@@ -115,371 +111,359 @@
+@@ -115,371 +111,367 @@
  
              return BlockRedstoneWire.EnumAttachPosition.NONE;
          }
@@ -317,12 +317,20 @@
 +            for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
 +                BlockPos blockpos = p_176345_2_.func_177972_a(enumfacing);
 +                l = this.func_176342_a(p_176345_1_, blockpos, l);
-+                if (p_176345_1_.func_180495_p(blockpos).func_185915_l() && !p_176345_1_.func_180495_p(p_176345_2_.func_177984_a()).func_185915_l()) {
-+                    l = this.func_176342_a(p_176345_1_, blockpos.func_177984_a(), l);
++                if (p_176345_1_.func_180495_p(blockpos).func_185915_l()) {
++                    if (!p_176345_1_.func_180495_p(p_176345_2_.func_177984_a()).func_185915_l()) {
++                        l = this.func_176342_a(p_176345_1_, blockpos.func_177977_b(), l);
++                    }
 +                }
-+                else if (!p_176345_1_.func_180495_p(blockpos).func_185915_l()) {
++                else {
 +                    l = this.func_176342_a(p_176345_1_, blockpos.func_177977_b(), l);
 +                }
++                /*if (worldIn.getBlockState(blockpos).isNormalCube() && !worldIn.getBlockState(pos1.up()).isNormalCube()) {
++                    l = this.getMaxCurrentStrength(worldIn, blockpos.up(), l);
++                }
++                else if (!worldIn.getBlockState(blockpos).isNormalCube()) {
++                    l = this.getMaxCurrentStrength(worldIn, blockpos.down(), l);
++                }*/
 +            }
 +            int newSignalStrength = Math.max(k, l - 1);
 +            if (i != newSignalStrength) {
@@ -671,7 +679,7 @@
              case CLOCKWISE_180:
                  return p_185499_1_.func_177226_a(field_176348_a, p_185499_1_.func_177229_b(field_176349_M)).func_177226_a(field_176347_b, p_185499_1_.func_177229_b(field_176350_N)).func_177226_a(field_176349_M, p_185499_1_.func_177229_b(field_176348_a)).func_177226_a(field_176350_N, p_185499_1_.func_177229_b(field_176347_b));
              case COUNTERCLOCKWISE_90:
-@@ -491,10 +475,8 @@
+@@ -491,10 +483,8 @@
          }
      }
  
@@ -684,7 +692,7 @@
              case LEFT_RIGHT:
                  return p_185471_1_.func_177226_a(field_176348_a, p_185471_1_.func_177229_b(field_176349_M)).func_177226_a(field_176349_M, p_185471_1_.func_177229_b(field_176348_a));
              case FRONT_BACK:
-@@ -504,36 +486,30 @@
+@@ -504,36 +494,30 @@
          }
      }
  
