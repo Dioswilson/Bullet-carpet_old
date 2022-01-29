@@ -319,7 +319,7 @@
 +                l = this.func_176342_a(p_176345_1_, blockpos, l);
 +                if (p_176345_1_.func_180495_p(blockpos).func_185915_l()) {
 +                    if (!p_176345_1_.func_180495_p(p_176345_2_.func_177984_a()).func_185915_l()) {
-+                        l = this.func_176342_a(p_176345_1_, blockpos.func_177977_b(), l);
++                        l = this.func_176342_a(p_176345_1_, blockpos.func_177984_a(), l);
 +                    }
 +                }
 +                else {
