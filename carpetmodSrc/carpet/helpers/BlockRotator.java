@@ -141,6 +141,10 @@ public class BlockRotator
                     .withProperty(BlockDoor.HINGE, hitX % 100 < 10 ? BlockDoor.EnumHingePosition.LEFT : BlockDoor.EnumHingePosition.RIGHT)
                     .withProperty(BlockDoor.OPEN, Boolean.valueOf(hitX > 100));
         }
+        else if (block instanceof BlockHopper) {
+            return block.getDefaultState()
+                    .withProperty(BlockHopper.FACING,EnumFacing.byIndex((int)hitX - 2));
+        }
         return null;
     }
 
