@@ -43,7 +43,7 @@ import static carpet.CarpetSettings.RuleCategory.*;
 public class CarpetSettings {
     public static boolean locked = false;
 
-    public static final String carpetVersion = "v21_12_27";
+    public static final String carpetVersion = "v22_01_27";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
@@ -623,7 +623,7 @@ public class CarpetSettings {
     @Rule(desc = "Redstone dust algorithm", category = {EXPERIMENTAL, OPTIMIZATIONS}, extra = {
             "Fast redstone dust by Theosib",
             "Random redstone dust to test if your contraption is locational",
-            "Modern aims to mimic 1.15's signal decrement to improve lag efficiency"
+            "Modern aims to mimic 1.15's signal decrement to improve lag efficiencya"
     })
     public static RedstoneDustAlgorithm redstoneDustAlgorithm = RedstoneDustAlgorithm.vanilla;
 
