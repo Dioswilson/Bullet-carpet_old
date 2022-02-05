@@ -21,7 +21,15 @@
  import net.minecraft.block.BlockLiquid;
  import net.minecraft.block.BlockPumpkin;
  import net.minecraft.block.BlockShulkerBox;
-@@ -58,11 +64,7 @@
+@@ -16,6 +22,7 @@
+ import net.minecraft.block.BlockTNT;
+ import net.minecraft.block.material.Material;
+ import net.minecraft.block.state.IBlockState;
++import net.minecraft.crash.CrashReport;
+ import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
+ import net.minecraft.dispenser.BehaviorProjectileDispense;
+ import net.minecraft.dispenser.IBehaviorDispenseItem;
+@@ -58,11 +65,7 @@
  import net.minecraft.tileentity.TileEntityDispenser;
  import net.minecraft.tileentity.TileEntityShulkerBox;
  import net.minecraft.tileentity.TileEntitySkull;
@@ -34,7 +42,7 @@
  import net.minecraft.util.math.BlockPos;
  import net.minecraft.world.World;
  import net.minecraft.world.biome.Biome;
-@@ -476,6 +478,9 @@
+@@ -476,6 +479,9 @@
              }
          });
  
@@ -44,3 +52,184 @@
          for (EnumDyeColor enumdyecolor : EnumDyeColor.values())
          {
              BlockDispenser.field_149943_a.func_82595_a(Item.func_150898_a(BlockShulkerBox.func_190952_a(enumdyecolor)), new Bootstrap.BehaviorDispenseShulkerBox());
+@@ -486,6 +492,10 @@
+     {
+         if (!field_151355_a)
+         {
++            // Fix the crash report without carpet rule. DON'T PUT A GOD-DAMN CARPET RULE FOR THIS OR I WILL GET MAD!
++            // Mojang even added this in 16. CARPET-XCOM
++            CrashReport.func_85055_a(new Exception(), "Dummy");
++
+             field_151355_a = true;
+             func_179868_d();
+             SoundEvent.func_187504_b();
+@@ -540,100 +550,100 @@
+     }
+ 
+     public static class BehaviorDispenseBoat extends BehaviorDefaultDispenseItem
++    {
++        private final BehaviorDefaultDispenseItem field_185026_b = new BehaviorDefaultDispenseItem();
++        private final EntityBoat.Type field_185027_c;
++
++        public BehaviorDispenseBoat(EntityBoat.Type p_i47023_1_)
+         {
+-            private final BehaviorDefaultDispenseItem field_185026_b = new BehaviorDefaultDispenseItem();
+-            private final EntityBoat.Type field_185027_c;
++            this.field_185027_c = p_i47023_1_;
++        }
+ 
+-            public BehaviorDispenseBoat(EntityBoat.Type p_i47023_1_)
++        public ItemStack func_82487_b(IBlockSource p_82487_1_, ItemStack p_82487_2_)
++        {
++            EnumFacing enumfacing = (EnumFacing)p_82487_1_.func_189992_e().func_177229_b(BlockDispenser.field_176441_a);
++            World world = p_82487_1_.func_82618_k();
++            double d0 = p_82487_1_.func_82615_a() + (double)((float)enumfacing.func_82601_c() * 1.125F);
++            double d1 = p_82487_1_.func_82617_b() + (double)((float)enumfacing.func_96559_d() * 1.125F);
++            double d2 = p_82487_1_.func_82616_c() + (double)((float)enumfacing.func_82599_e() * 1.125F);
++            BlockPos blockpos = p_82487_1_.func_180699_d().func_177972_a(enumfacing);
++            Material material = world.func_180495_p(blockpos).func_185904_a();
++            double d3;
++
++            if (Material.field_151586_h.equals(material))
+             {
+-                this.field_185027_c = p_i47023_1_;
++                d3 = 1.0D;
+             }
+-
+-            public ItemStack func_82487_b(IBlockSource p_82487_1_, ItemStack p_82487_2_)
++            else
+             {
+-                EnumFacing enumfacing = (EnumFacing)p_82487_1_.func_189992_e().func_177229_b(BlockDispenser.field_176441_a);
+-                World world = p_82487_1_.func_82618_k();
+-                double d0 = p_82487_1_.func_82615_a() + (double)((float)enumfacing.func_82601_c() * 1.125F);
+-                double d1 = p_82487_1_.func_82617_b() + (double)((float)enumfacing.func_96559_d() * 1.125F);
+-                double d2 = p_82487_1_.func_82616_c() + (double)((float)enumfacing.func_82599_e() * 1.125F);
+-                BlockPos blockpos = p_82487_1_.func_180699_d().func_177972_a(enumfacing);
+-                Material material = world.func_180495_p(blockpos).func_185904_a();
+-                double d3;
+-
+-                if (Material.field_151586_h.equals(material))
++                if (!Material.field_151579_a.equals(material) || !Material.field_151586_h.equals(world.func_180495_p(blockpos.func_177977_b()).func_185904_a()))
+                 {
+-                    d3 = 1.0D;
++                    return this.field_185026_b.func_82482_a(p_82487_1_, p_82487_2_);
+                 }
+-                else
+-                {
+-                    if (!Material.field_151579_a.equals(material) || !Material.field_151586_h.equals(world.func_180495_p(blockpos.func_177977_b()).func_185904_a()))
+-                    {
+-                        return this.field_185026_b.func_82482_a(p_82487_1_, p_82487_2_);
+-                    }
+ 
+-                    d3 = 0.0D;
+-                }
+-
+-                EntityBoat entityboat = new EntityBoat(world, d0, d1 + d3, d2);
+-                entityboat.func_184458_a(this.field_185027_c);
+-                entityboat.field_70177_z = enumfacing.func_185119_l();
+-                world.func_72838_d(entityboat);
+-                p_82487_2_.func_190918_g(1);
+-                return p_82487_2_;
++                d3 = 0.0D;
+             }
+ 
+-            protected void func_82485_a(IBlockSource p_82485_1_)
+-            {
+-                p_82485_1_.func_82618_k().func_175718_b(1000, p_82485_1_.func_180699_d(), 0);
+-            }
++            EntityBoat entityboat = new EntityBoat(world, d0, d1 + d3, d2);
++            entityboat.func_184458_a(this.field_185027_c);
++            entityboat.field_70177_z = enumfacing.func_185119_l();
++            world.func_72838_d(entityboat);
++            p_82487_2_.func_190918_g(1);
++            return p_82487_2_;
+         }
+ 
+-    public abstract static class BehaviorDispenseOptional extends BehaviorDefaultDispenseItem
++        protected void func_82485_a(IBlockSource p_82485_1_)
+         {
+-            protected boolean field_190911_b = true;
++            p_82485_1_.func_82618_k().func_175718_b(1000, p_82485_1_.func_180699_d(), 0);
++        }
++    }
+ 
+-            protected void func_82485_a(IBlockSource p_82485_1_)
+-            {
+-                p_82485_1_.func_82618_k().func_175718_b(this.field_190911_b ? 1000 : 1001, p_82485_1_.func_180699_d(), 0);
+-            }
++    public abstract static class BehaviorDispenseOptional extends BehaviorDefaultDispenseItem
++    {
++        protected boolean field_190911_b = true;
++
++        protected void func_82485_a(IBlockSource p_82485_1_)
++        {
++            p_82485_1_.func_82618_k().func_175718_b(this.field_190911_b ? 1000 : 1001, p_82485_1_.func_180699_d(), 0);
+         }
++    }
+ 
+     static class BehaviorDispenseShulkerBox extends Bootstrap.BehaviorDispenseOptional
++    {
++        private BehaviorDispenseShulkerBox()
+         {
+-            private BehaviorDispenseShulkerBox()
+-            {
+-            }
++        }
+ 
+-            protected ItemStack func_82487_b(IBlockSource p_82487_1_, ItemStack p_82487_2_)
++        protected ItemStack func_82487_b(IBlockSource p_82487_1_, ItemStack p_82487_2_)
++        {
++            Block block = Block.func_149634_a(p_82487_2_.func_77973_b());
++            World world = p_82487_1_.func_82618_k();
++            EnumFacing enumfacing = (EnumFacing)p_82487_1_.func_189992_e().func_177229_b(BlockDispenser.field_176441_a);
++            BlockPos blockpos = p_82487_1_.func_180699_d().func_177972_a(enumfacing);
++            this.field_190911_b = world.func_190527_a(block, blockpos, false, EnumFacing.DOWN, (Entity)null);
++
++            if (this.field_190911_b)
+             {
+-                Block block = Block.func_149634_a(p_82487_2_.func_77973_b());
+-                World world = p_82487_1_.func_82618_k();
+-                EnumFacing enumfacing = (EnumFacing)p_82487_1_.func_189992_e().func_177229_b(BlockDispenser.field_176441_a);
+-                BlockPos blockpos = p_82487_1_.func_180699_d().func_177972_a(enumfacing);
+-                this.field_190911_b = world.func_190527_a(block, blockpos, false, EnumFacing.DOWN, (Entity)null);
++                EnumFacing enumfacing1 = world.func_175623_d(blockpos.func_177977_b()) ? enumfacing : EnumFacing.UP;
++                IBlockState iblockstate = block.func_176223_P().func_177226_a(BlockShulkerBox.field_190957_a, enumfacing1);
++                world.func_175656_a(blockpos, iblockstate);
++                TileEntity tileentity = world.func_175625_s(blockpos);
++                ItemStack itemstack = p_82487_2_.func_77979_a(1);
+ 
+-                if (this.field_190911_b)
++                if (itemstack.func_77942_o())
+                 {
+-                    EnumFacing enumfacing1 = world.func_175623_d(blockpos.func_177977_b()) ? enumfacing : EnumFacing.UP;
+-                    IBlockState iblockstate = block.func_176223_P().func_177226_a(BlockShulkerBox.field_190957_a, enumfacing1);
+-                    world.func_175656_a(blockpos, iblockstate);
+-                    TileEntity tileentity = world.func_175625_s(blockpos);
+-                    ItemStack itemstack = p_82487_2_.func_77979_a(1);
++                    ((TileEntityShulkerBox)tileentity).func_190586_e(itemstack.func_77978_p().func_74775_l("BlockEntityTag"));
++                }
+ 
+-                    if (itemstack.func_77942_o())
+-                    {
+-                        ((TileEntityShulkerBox)tileentity).func_190586_e(itemstack.func_77978_p().func_74775_l("BlockEntityTag"));
+-                    }
+-
+-                    if (itemstack.func_82837_s())
+-                    {
+-                        ((TileEntityShulkerBox)tileentity).func_190575_a(itemstack.func_82833_r());
+-                    }
+-
+-                    world.func_175666_e(blockpos, iblockstate.func_177230_c());
++                if (itemstack.func_82837_s())
++                {
++                    ((TileEntityShulkerBox)tileentity).func_190575_a(itemstack.func_82833_r());
+                 }
+ 
+-                return p_82487_2_;
++                world.func_175666_e(blockpos, iblockstate.func_177230_c());
+             }
++
++            return p_82487_2_;
+         }
++    }
+ }
