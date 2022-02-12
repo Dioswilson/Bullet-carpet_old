@@ -77,27 +77,27 @@
 +            {
 +                p_176316_1_.func_180501_a(p_176316_2_,  p_176316_3_.func_177226_a(field_176320_b,  Boolean.valueOf(false)), 2);
 +            }
-+            
++
 +            // [CM] Piston ghost blocks fix - start
 +            int suppress_move = 0;
 +            if (CarpetSettings.pistonGhostBlocksFix == CarpetSettings.PistonGhostBlocksFix.clientAndServer)
 +            {
 +                final EnumFacing facing = p_176316_3_.func_177229_b(field_176387_N);
-+    
++
 +                final BlockPos blockpos = new BlockPos(p_176316_2_).func_177967_a(facing, 2);
 +                final IBlockState iblockstate = p_176316_1_.func_180495_p(blockpos);
-+    
++
 +                if (iblockstate.func_177230_c() == Blocks.field_180384_M)
 +                {
 +                    final TileEntity tileentity = p_176316_1_.func_175625_s(blockpos);
-+        
++
 +                    if (tileentity instanceof TileEntityPiston)
 +                    {
 +                        final TileEntityPiston tileentitypiston = (TileEntityPiston) tileentity;
 +                        if (tileentitypiston.func_174930_e() == facing && tileentitypiston.func_145868_b()
-+                                    && (tileentitypiston.field_145870_n < 0.5F
-+                                                || tileentitypiston.func_145831_w().func_82737_E() == tileentitypiston.lastTicked
-+                                                || !((WorldServer) p_176316_1_).haveBlockActionsProcessed()))
++                                && (tileentitypiston.field_145870_n < 0.5F
++                                || tileentitypiston.func_145831_w().func_82737_E() == tileentitypiston.lastTicked
++                                || !((WorldServer) p_176316_1_).haveBlockActionsProcessed()))
 +                        {
 +                            suppress_move = 16;
 +                        }
@@ -114,16 +114,16 @@
 -    private boolean func_176318_b(World p_176318_1_, BlockPos p_176318_2_, EnumFacing p_176318_3_)
 +    /*
 +     * This if statement checks if the the pulling block (block that is 2 blocks infront of the extended piston)
-+     * is a non-moving block and returns a meta value of 16 so it can tell the client to ignore pulling blocks 
++     * is a non-moving block and returns a meta value of 16 so it can tell the client to ignore pulling blocks
 +     * even if the client can pull them. CARPET-XCOM
 +     */
 +    private int ignoreMovingBlockMeta(World worldIn, BlockPos pos, EnumFacing enumfacing) {
 +        BlockPos blockpos = pos.func_177982_a(enumfacing.func_82601_c() * 2, enumfacing.func_96559_d() * 2, enumfacing.func_82599_e() * 2);
 +        IBlockState iblockstate = worldIn.func_180495_p(blockpos);
 +        Block block = iblockstate.func_177230_c();
-+        
++
 +        if (block == Blocks.field_180384_M) return 16;
-+        
++
 +        return 0;
 +    }
 +
@@ -144,16 +144,14 @@
              BlockPos blockpos = p_176318_2_.func_177984_a();
  
              for (EnumFacing enumfacing1 : EnumFacing.values())
-@@ -240,7 +317,11 @@
-                         }
+@@ -241,6 +318,10 @@
                      }
                  }
--
-+                
+ 
 +                // [CM] Piston ghost blocks fix
 +                if ((p_189539_5_ & 16) == 16 && CarpetSettings.pistonGhostBlocksFix == CarpetSettings.PistonGhostBlocksFix.clientAndServer)
 +                    flag1 = true;
-+                
++
                  if (!flag1 && iblockstate.func_185904_a() != Material.field_151579_a && func_185646_a(iblockstate, p_189539_2_, blockpos, enumfacing.func_176734_d(), false, enumfacing) && (iblockstate.func_185905_o() == EnumPushReaction.NORMAL || block == Blocks.field_150331_J || block == Blocks.field_150320_F))
                  {
                      this.func_176319_a(p_189539_2_, p_189539_3_, enumfacing, false);
@@ -174,21 +172,21 @@
              }
              else
              {
-@@ -319,6 +408,14 @@
-             return false;
+@@ -320,6 +409,14 @@
          }
      }
-+    
+ 
 +    // Movable Tile entity fix CARPET-2No2Name
 +    private static boolean isPushableTileEntityBlock(Block block)
 +    {
 +        //Making PISTON_EXTENSION (BlockPistonMoving) pushable would not work as its createNewTileEntity()-method returns null
 +        return block != Blocks.field_150477_bB && block != Blocks.field_150381_bn && block != Blocks.field_185775_db
-+        && block != Blocks.field_150384_bq && block != Blocks.field_150474_ac && block != Blocks.field_180384_M;
++                && block != Blocks.field_150384_bq && block != Blocks.field_150474_ac && block != Blocks.field_180384_M;
 +    }
- 
++
      private boolean func_176319_a(World p_176319_1_, BlockPos p_176319_2_, EnumFacing p_176319_3_, boolean p_176319_4_)
      {
+         if (!p_176319_4_)
 @@ -342,6 +439,7 @@
              {
                  BlockPos blockpos = list.get(i);
@@ -197,12 +195,11 @@
              }
  
              List<BlockPos> list2 = blockpistonstructurehelper.func_177252_d();
-@@ -358,15 +456,70 @@
-                 --k;
+@@ -359,14 +457,49 @@
                  aiblockstate[k] = iblockstate;
              }
-+            
-+         // Movable Tile entity fix CARPET-2No2Name
+ 
++            // Movable Tile entity fix CARPET-2No2Name
 +            List<TileEntity> list1_TileEntities = Lists.<TileEntity>newArrayList();
 +            if(CarpetSettings.movableTileEntities || CarpetSettings.autocrafter){
 +                for (int i = 0; i < list.size(); ++i)
@@ -210,7 +207,7 @@
 +                    BlockPos blockpos = list.get(i);
 +                    TileEntity tileentity = p_176319_1_.func_175625_s(blockpos);
 +                    list1_TileEntities.add(tileentity);
- 
++
 +                    if(tileentity != null)
 +                    {
 +                        p_176319_1_.func_175713_t(blockpos);
@@ -218,7 +215,7 @@
 +                    }
 +                }
 +            }
-+            
++
              for (int l = list.size() - 1; l >= 0; --l)
              {
                  BlockPos blockpos3 = list.get(l);
@@ -228,33 +225,11 @@
 +                }
 +                // ----- RSMM End ----- //
                  IBlockState iblockstate2 = p_176319_1_.func_180495_p(blockpos3);
--                p_176319_1_.func_180501_a(blockpos3, Blocks.field_150350_a.func_176223_P(), 2);
+                 p_176319_1_.func_180501_a(blockpos3, Blocks.field_150350_a.func_176223_P(), 2);
                  blockpos3 = blockpos3.func_177972_a(enumfacing);
--                p_176319_1_.func_180501_a(blockpos3, Blocks.field_180384_M.func_176223_P().func_177226_a(field_176387_N, p_176319_3_), 4);
+                 p_176319_1_.func_180501_a(blockpos3, Blocks.field_180384_M.func_176223_P().func_177226_a(field_176387_N, p_176319_3_), 4);
 -                p_176319_1_.func_175690_a(blockpos3, BlockPistonMoving.func_185588_a(list1.get(l), p_176319_3_, p_176319_4_, false));
-+                // Added the properties of opacity and light to the moving block as to minimize light updates. CARPET-XCOM
-+                if(CarpetSettings.movingBlockLightOptimization){
-+                    BlockPos posOld = list.get(l);
-+                    boolean remove = true;
-+                    for (int backwardCheck = l - 1; backwardCheck >= 0; --backwardCheck){
-+                        BlockPos blockposCheck = list.get(backwardCheck);
-+                        if(blockposCheck.func_177972_a(enumfacing).equals(posOld)){
-+                            remove = false;
-+                            break;
-+                        }
-+                    }
-+                    IBlockState iBlockState = Blocks.field_180384_M.func_176223_P().func_177226_a(field_176387_N, p_176319_3_)
-+                            .func_177226_a(BlockPistonMoving.OPACITY, Math.min(iblockstate2.func_185891_c(), 15))
-+                            .func_177226_a(BlockPistonMoving.LIGHT, iblockstate2.func_185906_d());
-+                    p_176319_1_.func_180501_a(blockpos3, iBlockState, 20);
-+                    if(remove){
-+                        p_176319_1_.func_180501_a(posOld, Blocks.field_150350_a.func_176223_P(), 2);
-+                    }
-+                    p_176319_1_.func_190522_c(blockpos3, iBlockState.func_177230_c());
-+                }else{
-+                    p_176319_1_.func_180501_a(list.get(l), Blocks.field_150350_a.func_176223_P(), 2);
-+                    p_176319_1_.func_180501_a(blockpos3, Blocks.field_180384_M.func_176223_P().func_177226_a(field_176387_N, p_176319_3_), 4);
-+                }
++
 +                // Movable Tile entity fix CARPET-2No2Name
 +                if(CarpetSettings.autocrafter && iblockstate2 instanceof BlockWorkbench){
 +                    TileEntity tilePiston = BlockPistonMoving.func_185588_a(list1.get(l), p_176319_3_, p_176319_4_, false);
@@ -271,7 +246,7 @@
                  --k;
                  aiblockstate[k] = iblockstate2;
              }
-@@ -397,6 +550,8 @@
+@@ -397,6 +530,8 @@
                  p_176319_1_.func_175685_c(blockpos2, Blocks.field_150332_K, false);
              }
  
@@ -280,7 +255,7 @@
              return true;
          }
      }
-@@ -439,4 +594,9 @@
+@@ -439,4 +574,9 @@
          p_193383_2_ = this.func_176221_a(p_193383_2_, p_193383_1_, p_193383_3_);
          return p_193383_2_.func_177229_b(field_176387_N) != p_193383_4_.func_176734_d() && ((Boolean)p_193383_2_.func_177229_b(field_176320_b)).booleanValue() ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
      }

@@ -23,6 +23,7 @@ import carpet.helpers.IronFarmOptimization;
 import carpet.helpers.RandomTickOptimization;
 import carpet.helpers.ScoreboardDelta;
 import carpet.patches.BlockWool;
+import carpet.prometheus.PrometheusExtension;
 import carpet.utils.TickingArea;
 import carpet.worldedit.WorldEditBridge;
 import net.minecraft.block.BlockFalling;
@@ -43,7 +44,7 @@ import static carpet.CarpetSettings.RuleCategory.*;
 public class CarpetSettings {
     public static boolean locked = false;
 
-    public static final String carpetVersion = "v22_01_27";
+    public static final String carpetVersion = "v22_02_09";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
@@ -623,7 +624,7 @@ public class CarpetSettings {
     @Rule(desc = "Redstone dust algorithm", category = {EXPERIMENTAL, OPTIMIZATIONS}, extra = {
             "Fast redstone dust by Theosib",
             "Random redstone dust to test if your contraption is locational",
-            "Modern aims to mimic 1.15's signal decrement to improve lag efficiencya"
+            "Modern aims to mimic 1.15's signal decrement to improve lag efficiency"
     })
     public static RedstoneDustAlgorithm redstoneDustAlgorithm = RedstoneDustAlgorithm.vanilla;
 
@@ -668,8 +669,8 @@ public class CarpetSettings {
     })
     public static boolean boundingBoxFix = false;
 
-    @Rule(desc = "Blocks inherit the original light opacity and light values while being pushed with a piston", category = OPTIMIZATIONS)
-    public static boolean movingBlockLightOptimization = false;
+    /*@Rule(desc = "Blocks inherit the original light opacity and light values while being pushed with a piston", category = OPTIMIZATIONS)
+    public static boolean movingBlockLightOptimization = false; Deleted by xcom/2no2name*/
 
     @Rule(desc = "Chunk saving issues that causes entites and blocks to duplicate or disappear", category = FIX, extra = "By Theosib")
     @BugFixDefault
@@ -1135,7 +1136,6 @@ public class CarpetSettings {
             category = {CREATIVE, EXPERIMENTAL, BULLET}
     )
     public static boolean extremeBehaviours;
-
     // ===== API ===== //
 
     /**
