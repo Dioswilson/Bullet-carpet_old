@@ -44,7 +44,7 @@ import static carpet.CarpetSettings.RuleCategory.*;
 public class CarpetSettings {
     public static boolean locked = false;
 
-    public static final String carpetVersion = "v22_02_09";
+    public static final String carpetVersion = "v22_3_21";
     public static final String minecraftVersion = "1.12.2";
     public static final String mcpMappings = "39-1.12";
 
@@ -819,6 +819,9 @@ public class CarpetSettings {
 
     @Rule(desc = "Sends invisible duplicate UUID entities to clients", category = FIX)
     public static boolean sendDuplicateEntitiesToClients = false;
+
+    @Rule(desc = "Enables best-effort saving of savestated chunks", category = FIX)
+    public static boolean saveSavestates = false;
 
     // ===== FEATURES ===== //
 

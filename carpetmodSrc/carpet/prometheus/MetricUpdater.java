@@ -22,7 +22,7 @@ public class MetricUpdater extends TimerTask {
             try {
                 metric.update(this.extension);
             } catch (Exception exception) {
-                exception.printStackTrace();
+                //exception.printStackTrace();
             }
         }
     }

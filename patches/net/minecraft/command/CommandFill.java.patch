@@ -25,16 +25,16 @@
              }
              else if (blockpos2.func_177956_o() >= 0 && blockpos3.func_177956_o() < 256)
              {
-@@ -96,6 +102,9 @@
-                         throw new CommandException("commands.fill.tagError", new Object[] {nbtexception.getMessage()});
+@@ -97,6 +103,9 @@
                      }
                  }
-+                
+ 
 +                EntityPlayerMP worldEditPlayer = p_184881_2_ instanceof EntityPlayerMP ? (EntityPlayerMP) p_184881_2_ : null;
 +                NBTTagCompound worldEditTag = flag ? nbttagcompound : null;
- 
++
                  List<BlockPos> list = Lists.<BlockPos>newArrayList();
                  i = 0;
+ 
 @@ -114,7 +123,13 @@
                                  {
                                      if ("destroy".equals(p_184881_3_[8]))
@@ -49,14 +49,16 @@
                                      }
                                      else if ("keep".equals(p_184881_3_[8]))
                                      {
-@@ -137,6 +152,7 @@
+@@ -137,7 +152,8 @@
                                  {
                                      if ("hollow".equals(p_184881_3_[8]))
                                      {
+-                                        world.func_180501_a(blockpos4, Blocks.field_150350_a.func_176223_P(), 2);
 +                                        WorldEditBridge.recordBlockEdit(worldEditPlayer, world, blockpos4, Blocks.field_150350_a.func_176223_P(), worldEditTag);
-                                         world.func_180501_a(blockpos4, Blocks.field_150350_a.func_176223_P(), 2);
++                                        world.func_180501_a(blockpos4, Blocks.field_150350_a.func_176223_P(), 2 | (CarpetSettings.fillUpdates?0:128)); // CM
                                          list.add(blockpos4);
                                      }
+ 
 @@ -145,6 +161,7 @@
                                  }
                              }
@@ -74,21 +76,23 @@
                              {
                                  list.add(blockpos4);
                                  ++i;
-@@ -173,12 +190,17 @@
-                         }
+@@ -174,11 +191,16 @@
                      }
                  }
--
-+                
+ 
+-                for (BlockPos blockpos5 : list)
 +                /*carpet mod */
 +                if (CarpetSettings.fillUpdates)
-+                {
-+                    /*carpet mod end EXTRA INDENT*/
-                 for (BlockPos blockpos5 : list)
                  {
-                     Block block2 = world.func_180495_p(blockpos5).func_177230_c();
-                     world.func_175722_b(blockpos5, block2, false);
-                 }
+-                    Block block2 = world.func_180495_p(blockpos5).func_177230_c();
+-                    world.func_175722_b(blockpos5, block2, false);
+-                }
++                    /*carpet mod end EXTRA INDENT*/
++                    for (BlockPos blockpos5 : list)
++                    {
++                        Block block2 = world.func_180495_p(blockpos5).func_177230_c();
++                        world.func_175722_b(blockpos5, block2, false);
++                    }
 +                } //carpet mod back extra indentation
  
                  if (i <= 0)
