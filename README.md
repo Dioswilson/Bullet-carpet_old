@@ -1,4 +1,4 @@
-##This is a fork(not technically) of carpetmod112 (https://github.com/gnembon/carpetmod112).
+## This is a fork(not technically) of carpetmod112 (https://github.com/gnembon/carpetmod112).
 
 # Carpet Mod 
 Yes.
@@ -31,7 +31,7 @@ It requires to have 7za installed in your paths
 
 ##  Here i will list what i changed:
 
-###Vales changes:
+### Vales changes:
 Vales is an external user who i asked permission to use his code, here are things he did:
 ```/carpet doorSearchOptimization
 /carpet doorCheckOptimization
@@ -52,10 +52,10 @@ readded time and total to /counter
 fixed /log items not tracking items that change dimensions
 ```
 
-###Prometheus addition:
+### Prometheus addition:
 I added prometheus integration(https://github.com/prometheus/client_java) into this for monitoring`/port` to change port.(Pasted license since i had to copy the code)
 
-###Bullet changes:
+### Bullet changes:
 Here i will list we did:
 
 - Changed some minecraft internal behaviour on player registery, i yeeted the toLowerCase method on it and changed a map into a tree map
