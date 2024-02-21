@@ -1,3 +1,5 @@
+# This repo is out of date, current repo is : https://github.com/Dioswilson/Bullet-carpet
+
 ## This is a fork(not technically) of carpetmod112 (https://github.com/gnembon/carpetmod112).
 
 # Carpet Mod 
